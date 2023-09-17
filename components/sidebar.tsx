@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { Montserrat } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard } from "lucide-react";
+import { Code, ImageIcon, LayoutDashboard, MessageSquare, Music, Settings, VideoIcon } from "lucide-react";
 
 const montserrat = Montserrat({
     weight: "600",
@@ -16,9 +16,43 @@ const routes = [
         label: "Dashboard",
         icon: LayoutDashboard,
         href: "/dashboard",
-        color: "text-sky-500",
+        color: "text-[#e29578]",
     },
-
+    {
+        label: "Conversation",
+        icon: MessageSquare,
+        href: "/conversation",
+        color: "text-lime-300",
+    },
+    {
+        label: "Image Generation",
+        icon: ImageIcon,
+        href: "/image",
+        color: "text-teal-400",
+    },
+    {
+        label: "Video Generation",
+        icon: VideoIcon,
+        href: "/video",
+        color: "text-blue-600",
+    },
+    {
+        label: "Music Generation",
+        icon: Music,
+        href: "/music",
+        color: "text-violet-700",
+    },
+    {
+        label: "Code Generation",
+        icon: Code,
+        href: "/code",
+        color: "text-pink-500",
+    },
+    {
+        label: "Settings",
+        icon: Settings,
+        href: "/dashboard",
+    }
 ]
 
 const SideBar = () => {
@@ -30,7 +64,7 @@ const SideBar = () => {
                         <Image fill alt="logo" src="/logo.png" />
                     </div>
                     <h1 className={cn("text-xl font-bold", montserrat.className)}>
-                        Brainiak
+                        Br<span className="text-[#e29578]">ai</span>niak
                     </h1>
                 </Link>
 
@@ -39,7 +73,7 @@ const SideBar = () => {
                         <Link
                             href={route.href}
                             key={route.href}
-                            className="text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition">
+                            className="text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 hover:scale-105 rounded-lg transition">
                             <div className="flex items-center flex-1">
                                 <route.icon className={cn("h-5 w-5 mr-3", route.color)} />
                                 {route.label}
