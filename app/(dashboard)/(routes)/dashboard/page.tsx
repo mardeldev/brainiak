@@ -65,7 +65,7 @@ const DashboardPage = () => {
             <div className="mb-8 space-y-4">
                 <div className="flex justify-center">
                     <h2 className="text-2xl md:text-4xl font-bold text-center ">
-                        Explore the <span className="text-[#E29578]">power</span> of <span className="text-[#E29578]">AI</span>
+                        Unleash the <span className="text-[#E29578]">power</span> of <span className="text-[#E29578]">AI</span>
                     </h2>
                     <Image src="/logo_black.png" width={40} height={40} alt="logo" className="mx-4"></Image>
                 </div>
