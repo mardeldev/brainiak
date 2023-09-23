@@ -82,7 +82,7 @@ const DashboardPage = () => {
                 {tools.map((tool) => (
                     <Card
                         key={tool.href}
-                        className={cn("p-4 border-black/5 flex items-center justify-between  hover:shadow-md transition cursor-pointer")}
+                        className={cn("p-4 border-black/5 flex items-center justify-between  hover:shadow-md hover:scale-105 transition cursor-pointer")}
                         onClick={() => router.push(tool.href)}
                     >
                         <div className="flex items-center gap-x-4">
