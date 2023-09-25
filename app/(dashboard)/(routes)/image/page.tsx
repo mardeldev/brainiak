@@ -6,7 +6,7 @@ import { amountOptions, formSchema, resolutionOptions } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Heading } from "@/components/heading";
-import { Image } from "lucide-react";
+import { Download, Image as LucideImage } from "lucide-react";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 
@@ -16,14 +16,16 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Image from "next/image"
 
 import OpenAI from "openai"
 import { cn } from "@/lib/utils";
 import { Select, SelectContent, SelectItem, SelectValue, SelectTrigger } from "@/components/ui/select";
+import { Card, CardFooter } from "@/components/ui/card";
 
 const ImagePage = () => {
     const router = useRouter();
-    const [images, setImage] = useState<string[]>([])
+    const [images, setImages] = useState<string[]>([])
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -47,12 +49,12 @@ const ImagePage = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            setImage([]);
+            setImages([]);
             const response = await axios.post("/api/image", values);
 
             const urls = response.data.map((image: { url: string }) => image.url)
 
-            setImage(urls)
+            setImages(urls)
             form.reset();
         } catch (error: any) {
             //TODO: OPEN PRO MODAL
@@ -67,7 +69,7 @@ const ImagePage = () => {
             <Heading
                 title="Image Generation"
                 description="Dream of an image and we'll make it for you."
-                icon={Image}
+                icon={LucideImage}
                 iconColor="text-teal-300"
                 bgColor="bg-teal-400/10"
             />
@@ -174,8 +176,34 @@ const ImagePage = () => {
                     {images.length === 0 && !isLoading && (
                         <Empty label="Enter a prompt to generate some images." />
                     )}
-                    <div>
-                        Images will be here
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
+                        {images.map((src) => (
+                            <Card
+                                key={src}
+                                className="rounded-lg overflow-hidden"
+                            >
+                                <div className="relative aspect-square">
+                                    <Image
+                                        alt="Image"
+                                        fill
+                                        src={src}
+                                    />
+                                </div>
+
+                                <CardFooter className="p-2">
+                                    <Button
+                                        variant="secondary"
+                                        className="w-full"
+                                        onClick={() => window.open(src)}
+                                    >
+                                        <Download className="h-4 w-4 mr-2" />
+                                        Download
+                                    </Button>
+
+                                </CardFooter>
+
+                            </Card>
+                        ))}
                     </div>
                 </div>
 
