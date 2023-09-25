@@ -38,14 +38,6 @@ const ImagePage = () => {
 
     const isLoading = form.formState.isSubmitting;
 
-    function renderWithLineBreaks(text: string) {
-        return text.split('\n').map((str, index, array) =>
-            index === array.length - 1 ? str : <>
-                {str}
-                <br />
-            </>
-        );
-    }
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
