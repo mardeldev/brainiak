@@ -6,7 +6,7 @@ import { formSchema } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Heading } from "@/components/heading";
-import { MessageSquare } from "lucide-react";
+import { Code } from "lucide-react";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 
@@ -22,7 +22,9 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 
-const ConversationPage = () => {
+import ReactMarkdown from "react-markdown";
+
+const CodePage = () => {
     const router = useRouter();
     const [messages, setMessages] = useState<OpenAI.Chat.ChatCompletionMessageParam[]>([]);
 
@@ -52,7 +54,7 @@ const ConversationPage = () => {
             }
             const newMessages = [...messages, userMessage]
 
-            const response = await axios.post("/api/conversation", {
+            const response = await axios.post("/api/code", {
                 messages: newMessages,
             });
 
@@ -70,11 +72,11 @@ const ConversationPage = () => {
     return (
         <div>
             <Heading
-                title="Conversation"
-                description="Your very own conversation model."
-                icon={MessageSquare}
-                iconColor="text-lime-300"
-                bgColor="bg-lime-400/10"
+                title="Code Generation"
+                description="Generate code using descriptive text."
+                icon={Code}
+                iconColor="text-pink-300"
+                bgColor="bg-pink-400/10"
             />
 
             <div className="px-4 lg:px-8">
@@ -92,7 +94,7 @@ const ConversationPage = () => {
                                             <Input
                                                 className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent text-center lg:text-left"
                                                 disabled={isLoading}
-                                                placeholder={messages.length <= 0 ? "Ask Brainiak something interesting..." : "Ask Brainiak some more questions..."}
+                                                placeholder={messages.length <= 0 ? "Ask Brainiak to help you with some code..." : "Any follow up questions?..."}
                                                 {...field}
                                             />
                                         </FormControl>
@@ -125,12 +127,22 @@ const ConversationPage = () => {
                                 className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg m-2", message.role === "user" ? "bg-white border border-black/10" : "bg-muted")}
                             >
                                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                                <p className="text-sm">
-                                    {message.content && (
-                                        renderWithLineBreaks(message.content)
-                                    )
-                                    }
-                                </p>
+                                <ReactMarkdown
+                                    components={{
+                                        pre: ({ node, ...props }) => (
+                                            <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
+                                                <pre {...props} />
+                                            </div>
+                                        ),
+                                        code: ({ node, ...props }) => (
+                                            <code className="bg-black/10 rounded-lg p-1" {...props} />
+                                        )
+                                    }}
+                                    className="text-sm overflow-hidden leading-7"
+
+                                >
+                                    {message.content}
+                                </ReactMarkdown>
 
                             </div>
                         ))}
@@ -145,4 +157,4 @@ const ConversationPage = () => {
     );
 }
 
-export default ConversationPage
+export default CodePage
