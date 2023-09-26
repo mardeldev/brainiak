@@ -1,28 +1,30 @@
 "use client"
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import * as z from "zod";
 import { formSchema } from "./constants";
-import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Heading } from "@/components/heading";
-import { MessageSquare } from "lucide-react";
 import { Empty } from "@/components/empty";
+import { Heading } from "@/components/heading";
 import { Loader } from "@/components/loader";
+import { MessageSquare } from "lucide-react";
 
-import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-import OpenAI from "openai"
-import { cn } from "@/lib/utils";
-import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
+import { UserAvatar } from "@/components/user-avatar";
+import { useProModal } from "@/hooks/use-pro-modal";
+import { cn } from "@/lib/utils";
+import OpenAI from "openai";
 
 const ConversationPage = () => {
+    const proModal = useProModal();
     const router = useRouter();
     const [messages, setMessages] = useState<OpenAI.Chat.ChatCompletionMessageParam[]>([]);
 
@@ -60,8 +62,9 @@ const ConversationPage = () => {
 
             form.reset();
         } catch (error: any) {
-            //TODO: OPEN PRO MODAL
-            console.log(error);
+            if (error?.response?.status === 403) {
+              proModal.onOpen();
+            }
         } finally {
             router.refresh();
         }
