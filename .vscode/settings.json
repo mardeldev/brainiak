@@ -1,8 +1,6 @@
 {
-    "cSpell.words": [
-        "nextjs"
-    ],
-    "typescript.tsdk": "node_modules\\typescript\\lib",
+  "cSpell.words": ["nextjs"],
+  "typescript.tsdk": "node_modules\\typescript\\lib",
   "cmake.configureOnOpen": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
