@@ -1,4 +1,5 @@
 import { Heading } from "@/components/heading";
+import { SubscriptionButton } from "@/components/subscription-button";
 import { checkSubscription } from "@/lib/subscription";
 import { Settings } from "lucide-react";
 
@@ -20,6 +21,7 @@ const SettingsPage = async () => {
             ? "You are currently on the Pro plan."
             : "You are currently on the free plan"}
         </div>
+        <SubscriptionButton isPro={isPro} />
       </div>
     </div>
   );
