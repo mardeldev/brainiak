@@ -7,6 +7,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
 
 const font = Montserrat({
   weight: "600",
@@ -26,10 +27,11 @@ export const LandingNavbar = () => {
           Br<span className="text-[#e29578]">ai</span>niak
         </h1>
       </Link>
-      <div className="flex items-center gap-x-2">
+      <div className="flex items-between gap-x-2  md:w-full">
         <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-          <Button variant="outline" className="rounded-full">
-            Get Started
+          <Button variant="outline" className="rounded-full w-36">
+            {isSignedIn ? "Go to your dashboard" : "Get Started For Free"}
+            <ArrowRight className="ml-2" />
           </Button>
         </Link>
       </div>
