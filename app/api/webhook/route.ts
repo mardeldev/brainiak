@@ -62,5 +62,18 @@ export async function POST(req: Request) {
     });
   }
 
+  if (
+    event.type === "customer.subscription.deleted" ||
+    event.type === "subscription_schedule.canceled"
+  ) {
+    const subscription = event.data.object as Stripe.Subscription;
+
+    await prismadb.userSubscription.delete({
+      where: {
+        stripeSubscriptionId: subscription.id,
+      },
+    });
+  }
+
   return new NextResponse(null, { status: 200 });
 }
