@@ -19,8 +19,11 @@ import { useForm } from "react-hook-form";
 import { BotAvatar } from "@/components/bot-avatar";
 import { UserAvatar } from "@/components/user-avatar";
 import { useProModal } from "@/hooks/use-pro-modal";
+
 import { cn } from "@/lib/utils";
+import axios from "axios";
 import OpenAI from "openai";
+import { ChatCompletionMessageParam } from "openai/resources/chat/index.mjs";
 import toast from "react-hot-toast";
 
 const ConversationPage = () => {
@@ -54,6 +57,19 @@ const ConversationPage = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      const userMessage: ChatCompletionMessageParam = {
+        role: "user",
+        content: values.prompt,
+      };
+      const newMessages = [...messages, userMessage];
+
+      const response = await axios.post("/api/conversation", {
+        messages: newMessages,
+      });
+
+      setMessages((current) => [...current, userMessage, response.data]);
+
+      form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModal.onOpen();

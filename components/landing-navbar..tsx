@@ -27,9 +27,9 @@ export const LandingNavbar = () => {
           Br<span className="text-[#e29578]">ai</span>niak
         </h1>
       </Link>
-      <div className="flex items-between gap-x-2  md:w-full">
+      <div className="flex items-between gap-x-2">
         <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-          <Button variant="outline" className="rounded-full w-36">
+          <Button variant="outline" className="rounded-full w-36 md:w-full">
             {isSignedIn ? "Go to your dashboard" : "Get Started For Free"}
             <ArrowRight className="ml-2" />
           </Button>

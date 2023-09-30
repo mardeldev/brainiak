@@ -23,8 +23,8 @@ import { cn } from "@/lib/utils";
 import OpenAI from "openai";
 
 import { useProModal } from "@/hooks/use-pro-modal";
-import ReactMarkdown from "react-markdown";
 import toast from "react-hot-toast";
+import ReactMarkdown from "react-markdown";
 
 const CodePage = () => {
   const proModal = useProModal();
