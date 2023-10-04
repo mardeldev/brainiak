@@ -1,34 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Brainiak
+---
+A full-stack application made with Next.js. This app uses the OpenAI and Replicate APIs to allow the user to utilise artificial intelligence and generate content from prompts. Users are able to converse a general AI chatbot as well as generate images, video, music and code. With the use of the Clerk SDK, users are able to log in, subscribe and manage their accounts. Clerk webhooks and events also updates the Prisma database depending on user activity. There is a free tier for new users that allows for 5 generations. This information is stored in a Prisma database. User support has been implemented with Crisp.
+## Visit the page <a href= "https://brainiak.vercel.app">here</a> 
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<img src="https://cdn.discordapp.com/attachments/1110172643895808040/1158302502974922752/image.png?ex=651bc0c4&is=651a6f44&hm=68009543cb600629ced9dd132a3bfadc76f9b4a7d56631de5f6a6ee8ad1c4f30&" alt="brainiak_hero"/>
